@@ -1,4 +1,5 @@
-﻿using Kolokwium2.Services;
+﻿using Kolokwium2.DTO;
+using Kolokwium2.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kolokwium2.Controllers;
@@ -17,6 +18,13 @@ public class CharactersController : ControllerBase
     {
         
         var characters = await _dbService.GetCharacterData(characterId);
-        return Ok();
+        return Ok(characters.Select(e => new GetCharacterDTO()
+        {
+            FirstName = e.FirstName,
+            LastName = e.LastName,
+            currentWeight = e.CurrentWei,
+            maxWeight = e.MaxWeight
+        }).ToList()
+        );
     }
 }

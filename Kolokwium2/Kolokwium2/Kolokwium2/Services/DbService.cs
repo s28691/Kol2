@@ -17,4 +17,9 @@ public class DbService : IDbService
             .Where(e => e.Id == characterId)
             .ToListAsync();
     }
+
+    public async Task<bool> DoesItemExist(int idItem)
+    {
+        return await _context.Items.AnyAsync(e => e.Id == idItem);
+    }
 }
