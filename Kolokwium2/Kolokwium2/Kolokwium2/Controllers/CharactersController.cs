@@ -11,4 +11,12 @@ public class CharactersController : ControllerBase
     {
         _dbService = dbService;
     }
+
+    [HttpGet("{characterId}")]
+    public async Task<IActionResult> GetCharacter(int characterId)
+    {
+        
+        var characters = await _dbService.GetCharacterData(characterId);
+        return Ok();
+    }
 }
